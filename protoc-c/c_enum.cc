@@ -111,7 +111,7 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
     }
   }
 
-  printer->Print(vars, "  PROTOBUF_C__FORCE_ENUM_TO_BE_INT_SIZE($uc_name$)\n");
+  printer->Print(vars, "  _PROTOBUF_C_FORCE_ENUM_TO_BE_INT_SIZE($uc_name$)\n");
   printer->Outdent();
   printer->Print(vars, "} $classname$;\n");
 }
@@ -272,7 +272,7 @@ void EnumGenerator::GenerateEnumDescriptor(io::Printer* printer) {
   printer->Print(vars,
     "const ProtobufCEnumDescriptor $lcclassname$__descriptor =\n"
     "{\n"
-    "  PROTOBUF_C__ENUM_DESCRIPTOR_MAGIC,\n"
+    "  PROTOBUF_C_ENUM_DESCRIPTOR_MAGIC,\n"
     "  \"$fullname$\",\n"
     "  \"$shortname$\",\n"
     "  \"$cname$\",\n"

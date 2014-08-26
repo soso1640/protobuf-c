@@ -22,14 +22,6 @@ AM_CPPFLAGS = \
 AM_CFLAGS = ${my_CFLAGS}
 AM_LDFLAGS =
 
-# code coverage
-
-AM_CFLAGS += ${CODE_COVERAGE_CFLAGS}
-AM_LDFLAGS += ${CODE_COVERAGE_LDFLAGS}
-CODE_COVERAGE_LCOV_OPTIONS = --no-external
-CODE_COVERAGE_IGNORE_PATTERN = "$(abs_top_builddir)/t/*"
-@CODE_COVERAGE_RULES@
-
 #
 # libprotobuf-c
 #
@@ -192,19 +184,10 @@ install-data-hook:
 	cd $(DESTDIR)$(includedir)/google/protobuf-c && rm -vf protobuf-c.h
 	cd $(DESTDIR)$(includedir)/google/protobuf-c && $(LN_S) ../../protobuf-c/protobuf-c.h protobuf-c.h
 
-#
-# documentation
-#
+if DOXYGEN_TARGET
 
-if HAVE_DOXYGEN
-stamp-html: $(DOXYGEN_INPUT_FILES) $(top_builddir)/Doxyfile $(top_srcdir)/DoxygenLayout.xml $(include_HEADERS) $(nobase_include_HEADERS)
-	$(AM_V_GEN) $(DOXYGEN)
-	@touch $@
-html-local: stamp-html
+include aminclude_doxygen.am
 
-clean-local:
-	rm -rf $(top_builddir)/html $(top_builddir)/stamp-html
-endif
+MOSTLYCLEANFILES = $(DX_CLEANFILES)
 
-EXTRA_DIST += Doxyfile.in
-EXTRA_DIST += DoxygenLayout.xml
+endif # DOXYGEN_TARGET

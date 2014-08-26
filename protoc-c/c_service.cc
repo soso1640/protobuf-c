@@ -226,7 +226,7 @@ void ServiceGenerator::GenerateServiceDescriptor(io::Printer* printer)
 
   printer->Print(vars_, "const ProtobufCServiceDescriptor $lcfullname$__descriptor =\n"
                        "{\n"
-		       "  PROTOBUF_C__SERVICE_DESCRIPTOR_MAGIC,\n"
+		       "  PROTOBUF_C_SERVICE_DESCRIPTOR_MAGIC,\n"
 		       "  \"$fullname$\",\n"
 		       "  \"$name$\",\n"
 		       "  \"$cname$\",\n"
@@ -258,7 +258,7 @@ void ServiceGenerator::GenerateCallersImplementations(io::Printer* printer)
                    "     $padddddddddddddddddd$ $output_typename$_Closure closure,\n"
                    "     $padddddddddddddddddd$ void *closure_data)\n"
 		   "{\n"
-		   "  assert(service->descriptor == &$lcfullname$__descriptor);\n"
+		   "  PROTOBUF_C_ASSERT (service->descriptor == &$lcfullname$__descriptor);\n"
 		   "  service->invoke(service, $index$, (const ProtobufCMessage *) input, (ProtobufCClosure) closure, closure_data);\n"
 		   "}\n");
   }
